@@ -1,6 +1,6 @@
-# Project ChronoScan
+# Project LonelyReminder
 
-**ChronoScan is an intelligent, offline-first, cross-platform application designed to instantly capture events from images and screenshots, keeping your schedule effortlessly in sync across all your devices.**
+**LonelyReminder is an intelligent, offline-first, cross-platform application designed to instantly capture events from images and screenshots, keeping your schedule effortlessly in sync across all your devices.**
 
 ## 🎯 Problem Statement
 
@@ -59,8 +59,8 @@ The application is built on an **Offline-First** architecture. This ensures a sm
 
 ```bash
 # Clone the repository
-git clone https://lonelyguy12/lonelyreminder/chronoscan.git
-cd chronoscan/client
+git clone https://github.com/lonelyguy12/lonelyreminder/
+cd lonelyreminder
 
 # Install dependencies
 flutter pub get
