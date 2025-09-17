@@ -11,17 +11,19 @@ dependencies:
     sdk: flutter
 
   # Core Packages for our app
-  isar: ^3.1.0+1                 # High-performance local database
-  isar_flutter_libs: ^3.1.0+1    # Bindings for Isar on Flutter
-  chrono: ^0.1.0                 # Natural language date parsing
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  chrono: ^0.1.0
   
   # Utility Packages
-  path_provider: ^2.1.2          # For finding the app's document directory
-  image_picker: ^1.0.7           # For picking images from gallery/camera
-  google_mlkit_text_recognition: ^0.11.0 # For on-device OCR
+  path_provider: ^2.1.2
+  image_picker: ^1.0.7
+  google_mlkit_text_recognition: ^0.11.0
+  intl: ^0.18.1 # For date formatting
   
   # UI
   cupertino_icons: ^1.0.6
+  
   
 
 dev_dependencies:
@@ -29,11 +31,16 @@ dev_dependencies:
     sdk: flutter
 
   # Code Generation
-  build_runner: ^2.4.8           # For running code generators
-  isar_generator: ^3.1.0+1       # Isar's code generator
+  build_runner: ^2.4.8
+  isar_generator: ^3.1.0+1
 
   # Code quality
   flutter_lints: ^2.0.0
+
+# This is the fix. We are forcing a specific version of the 'analyzer' package
+# to resolve the conflict between isar_generator and flutter_test.
+dependency_overrides:
+  analyzer: '5.13.0'
 
 flutter:
   uses-material-design: true
