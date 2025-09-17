@@ -1,8 +1,6 @@
 import 'dart:isolate'; // Import for Isolate
 import 'package:flutter/material.dart';
-
-
-
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart'; // Import for ML Kit
 import 'package:image_picker/image_picker.dart';
 import 'package:reminderapp/event_parser.dart';
 
@@ -72,8 +70,17 @@ class _MyHomePageState extends State<MyHomePage> {
     final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
-      print('OCR functionality is currently disabled.');
-      return; // Do nothing for now
+      final inputImage = InputImage.fromFilePath(pickedImage.path);
+      final textRecognizer = TextRecognizer();
+      final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+      await textRecognizer.close();
+
+      final eventParser = EventParser();
+      final event = eventParser.parse(recognizedText.text);
+
+      setState(() {
+        _events.add(event);
+      });
     }
   }
 
