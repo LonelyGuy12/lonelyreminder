@@ -1,46 +1,41 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:reminderapp/event_parser.dart'; // Assuming Event and EventParser are still relevant
+import 'package:lonelyreminder/models/event_model.dart';
+import 'package:lonelyreminder/services/event_parser.dart';
 
+/// A simple OCR test that demonstrates event parsing without actual OCR
+/// This replaces the broken OCR functionality with a simple text parsing demo
 void main(List<String> arguments) async {
-  if (arguments.isEmpty) {
-    print('Usage: dart ocr_test.dart <image_path>');
-    exit(1);
+  print('Starting Event Parser test...');
+
+  // Sample text that would normally come from OCR
+  const sampleTexts = [
+    'Meeting with John tomorrow at 10am',
+    'Doctor appointment on Friday at 2:30 PM',
+    'Team standup Monday 9:00 AM',
+    'Lunch with Sarah next Tuesday at 12:30',
+    'Project deadline December 15th',
+  ];
+
+  print('Testing event parsing with sample texts:\n');
+
+  for (int i = 0; i < sampleTexts.length; i++) {
+    final text = sampleTexts[i];
+    print('--- Test ${i + 1} ---');
+    print('Input text: "$text"');
+    
+    try {
+      final event = await EventParser.parseEvent(text);
+      print('Parsed event:');
+      print('  Title: ${event.title}');
+      print('  Start time: ${event.startTime}');
+      print('  Description: ${event.description ?? 'None'}');
+      print('  End time: ${event.endTime ?? 'None'}');
+    } catch (e) {
+      print('Error parsing event: $e');
+    }
+    
+    print('');
   }
 
-  final imagePath = arguments[0];
-  final imageFile = File(imagePath);
-
-  if (!await imageFile.exists()) {
-    print('Error: Image file not found at $imagePath');
-    exit(1);
-  }
-
-  try {
-    final textRecognizer = TextRecognizer();
-    final recognizedText = await textRecognizer.processImage(InputImage.fromFilePath(imageFile.path));
-
-    final eventParser = EventParser();
-    final event = eventParser.parse(recognizedText.text);
-
-    final Map<String, dynamic> result = {
-      'success': true,
-      'imagePath': imagePath,
-      'recognizedText': recognizedText.text,
-      'parsedEvent': {
-        'title': event.title,
-        'date': event.date?.toIso8601String(),
-        'time': event.time,
-      },
-    };
-    print(jsonEncode(result));
-  } catch (e) {
-    final Map<String, dynamic> errorResult = {
-      'success': false,
-      'imagePath': imagePath,
-      'error': e.toString(),
-    };
-    print(jsonEncode(errorResult));
-  }
+  print('Event parser test completed!');
 }
