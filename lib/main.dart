@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lonelyreminder/models/event_model.dart';
 import 'package:lonelyreminder/services/database_service.dart';
@@ -240,8 +239,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Event "${event.title}" added successfully!'),
+            const SnackBar(
+              content: Text('Event added successfully!'),
               backgroundColor: Colors.green,
             ),
           );
@@ -266,8 +265,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Event "${event.title}" deleted'),
+          const SnackBar(
+            content: Text('Event deleted'),
             backgroundColor: Colors.orange,
           ),
         );
@@ -335,7 +334,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.event_note,
                             size: 64,
                             color: Colors.grey,
@@ -381,9 +380,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               contentPadding: const EdgeInsets.all(16),
                               leading: Hero(
                                 tag: 'event_${event.title}_${event.startTime}',
-                                child: CircleAvatar(
+                                child: const CircleAvatar(
                                   backgroundColor: Colors.teal,
-                                  child: const Icon(Icons.event, color: Colors.white),
+                                  child: Icon(Icons.event, color: Colors.white),
                                 ),
                               ),
                               title: Text(

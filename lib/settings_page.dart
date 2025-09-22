@@ -35,11 +35,13 @@ class _SettingsPageState extends State<SettingsPage> {
         setState(() {
           _currentUser = user;
         });
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Signed in as ${user.displayName}')),
         );
       }
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Sign-in failed: $e')),
       );
@@ -51,6 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {
       _currentUser = null;
     });
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Signed out successfully')),
     );
@@ -58,6 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> _importFromGoogleCalendar() async {
     if (_currentUser == null) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please sign in with Google first')),
       );
@@ -67,10 +71,12 @@ class _SettingsPageState extends State<SettingsPage> {
     try {
       final googleEvents = await _calendarService.getUpcomingEvents();
       await _calendarService.importEvents(googleEvents);
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Imported ${googleEvents.length} events from Google Calendar')),
       );
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Import failed: $e')),
       );

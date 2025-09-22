@@ -17,6 +17,7 @@ dependencies:
   path_provider: ^2.1.2
   image_picker: ^1.0.7
   intl: ^0.18.1 # For date formatting
+  http: ^1.2.1
 
   # UI
   cupertino_icons: ^1.0.6

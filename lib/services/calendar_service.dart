@@ -1,8 +1,4 @@
 import 'package:googleapis/calendar/v3.dart' as calendar;
-import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
 
 class CalendarService {
   // You'll need to replace this with your Google Cloud Console project data
@@ -28,7 +24,6 @@ class CalendarService {
       );
       return events.items ?? [];
     } catch (e) {
-      print('Calendar Error: $e');
       return [];
     }
   }
@@ -36,9 +31,8 @@ class CalendarService {
   Future<void> importEvents(List<calendar.Event> googleEvents) async {
     // Import logic would integrate with your existing DatabaseService
     // This is a placeholder - in real implementation, convert and save
-    for (var event in googleEvents) {
+    for (final _ in googleEvents) {
       // Convert to Event model and save
-      print('Importing: ${event.summary}');
     }
   }
 }

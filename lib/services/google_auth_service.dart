@@ -20,7 +20,6 @@ class GoogleAuthService {
       final userCredential = await _auth.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
-      print('Google Sign-In Error: $e');
       return null;
     }
   }
